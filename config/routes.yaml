@@ -1,0 +1,3 @@
+project:
+  resource: '../src/Project/Resources/routing/'
+  type: directory

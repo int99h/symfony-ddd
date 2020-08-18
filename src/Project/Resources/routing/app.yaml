@@ -1,0 +1,4 @@
+app.health:
+  path: "/health"
+  methods: GET
+  controller: App\Project\Http\Controller\AppController:health

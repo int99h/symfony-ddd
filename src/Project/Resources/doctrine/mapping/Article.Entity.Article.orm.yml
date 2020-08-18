@@ -1,0 +1,19 @@
+App\Project\Domain\Article\Entity\Article:
+  type: entity
+  table: article
+  repositoryClass: App\Project\Infrastructure\Article\ArticleRepository
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+    body:
+      type: text
+    createdAt:
+      type: datetime
+    updatedAt:
+      type: datetime
+      nullable: true

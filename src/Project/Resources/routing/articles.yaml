@@ -1,0 +1,24 @@
+articles.list:
+  path: "/api/articles"
+  methods: GET
+  controller: App\Project\Http\Controller\ArticleController:list
+
+articles.read:
+  path: "/api/articles/{id}"
+  methods: GET
+  controller: App\Project\Http\Controller\ArticleController:one
+
+articles.create:
+  path: "/api/articles"
+  methods: POST
+  controller: App\Project\Http\Controller\ArticleController:create
+
+articles.update:
+  path: "/api/articles/{id}"
+  methods: POST
+  controller: App\Project\Http\Controller\ArticleController:update
+
+articles.delete:
+  path: "/api/articles/{id}"
+  methods: DELETE
+  controller: App\Project\Http\Controller\ArticleController:delete

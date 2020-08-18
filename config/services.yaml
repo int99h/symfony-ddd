@@ -1,0 +1,15 @@
+parameters:
+    locale: 'en'
+    access.token: '%env(ACCESS_TOKEN)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Project\Http\Controller\:
+        resource: '../src/Project/Http/Controller'
+        tags: ['controller.service_arguments']
+
+imports:
+    - { resource: "../src/Project/Resources/config/services.yaml"}

@@ -1,0 +1,19 @@
+imports:
+  - { resource: "transformers.yaml"}
+
+services:
+  # events
+  App\Project\App\EventListener\ApiExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 200 }
+  # services
+  App\Project\App\Service\FractalService:
+    autowire: true
+    autoconfigure: true
+  App\Project\App\Service\TokenService:
+    autowire: true
+    autoconfigure: true
+  # article
+  App\Project\Domain\Article\ArticleService:
+    autowire: true
+    autoconfigure: true
