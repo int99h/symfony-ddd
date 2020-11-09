@@ -24,11 +24,10 @@ RUN apt-get update -qq && apt-get install -yqq \
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list
 
-### Install app packages
+### Install app packages & clear apt cache
 RUN apt-get update -qq && apt-get install -qq -y \
     nginx \
     supervisor \
-    composer \
     php7.4-cli \
     php7.4-fpm \
     php7.4-common \
@@ -49,9 +48,7 @@ RUN apt-get update -qq && apt-get install -qq -y \
     php7.4-mongodb \
     php7.4-amqp \
     php7.4-zip \
-    --no-install-recommends
-### Clear apt cache
-RUN rm -r /var/lib/apt/lists/*
+    --no-install-recommends && rm -r /var/lib/apt/lists/*
 
 ### Configure php
 RUN mkdir -m 0775 -p /var/run/php && chown -R www-data:www-data /var/run/php
@@ -78,11 +75,12 @@ COPY ./supervisor/app.conf /etc/supervisor/conf.d/webserver.conf
 RUN service php7.4-fpm stop && service nginx stop
 
 # Prepare app
-RUN mkdir -m 755 -p /var/www/app
-RUN chown -R www-data:www-data /var/www/app
+RUN mkdir -m 755 -p /var/www/app && chown -R www-data:www-data /var/www/app
 
-# Install composer plugin
-RUN composer global require hirak/prestissimo -q
+### Install composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php --install-dir=/usr/bin --filename=composer && \
+    php -r "unlink('composer-setup.php');"
 
 WORKDIR /var/www/app
 EXPOSE 80

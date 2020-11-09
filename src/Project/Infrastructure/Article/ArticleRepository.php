@@ -2,12 +2,9 @@
 
 namespace App\Project\Infrastructure\Article;
 
+use App\Project\Infrastructure\AbstractEntityRepository;
 use App\Project\Domain\Article\Entity\Article;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Query;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Article[]    findAll()
  * @method Article[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ArticleRepository extends EntityRepository
+class ArticleRepository extends AbstractEntityRepository
 {
     /**
      * @param string $order
